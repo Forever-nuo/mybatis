@@ -14,6 +14,23 @@
         <property name="jdbc_username" value="root"/>
     </properties>
 
+
+    <typeAliases>
+        <!--
+        单个类起别名
+        默认是类名小写
+        也可以另外重起
+        -->
+        <!--    <typeAlias type="com.forever.mybatissingle.mode.Person" />-->
+
+        <!--
+        批量器起别名
+        -->
+        <package name="com.forever.mybatissingle.mode"/>
+    </typeAliases>
+
+    <!---->
+
     <!--mybatis对应的数据源-->
     <environments default="development">
         <environment id="development">
@@ -30,4 +47,6 @@
     <mappers>
         <mapper resource="person.xml"/>
     </mappers>
+
+
 </configuration>

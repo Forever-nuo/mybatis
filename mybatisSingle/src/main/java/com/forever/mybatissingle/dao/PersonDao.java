@@ -8,5 +8,13 @@ import com.forever.mybatissingle.mode.Person;
  */
 public interface PersonDao {
 
+    /**
+     * 选择某个人
+     *
+     * @param id:
+     * @return
+     * @Author: Forever丶诺
+     * @Date: 22:56 2018-4-3
+     */
     Person selectPerson(Integer id);
 }
