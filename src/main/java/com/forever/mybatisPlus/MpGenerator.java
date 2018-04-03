@@ -5,13 +5,15 @@ import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import com.forever.mybatisPlus.model.User;
+
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.forever.mybatisPlus.ContVal.*;
 
 /**
  * <p>
@@ -27,14 +29,6 @@ public class MpGenerator {
         gc = new GlobalConfig();
         mpg = new AutoGenerator();
     }
-
-
-    @Test
-    public void test() {
-        User user = new User().setAge(15).setId(1).setName("张三");
-        System.out.println(user);
-    }
-
 
     /**
      * <p>
@@ -53,11 +47,11 @@ public class MpGenerator {
         mpg.execute();  // 执行生成
     }
 
-
-
     private void setGenerator() {
         // 选择 freemarker 引擎，默认 Veloctiy
         // mpg.setTemplateEngine(new FreemarkerTemplateEngine());
+        // gc.setKotlin(true); //是否生成 kotlin 代码 (默认为false)
+
 
         // 全局配置
         gc.setFileOverride(true); //设置文件覆盖 (默认为false)
@@ -65,15 +59,23 @@ public class MpGenerator {
         gc.setEnableCache(false);// XML 二级缓存
         gc.setBaseResultMap(true);// XML ResultMap
         gc.setBaseColumnList(false);// XML columList
-        gc.setAuthor("Forever丶诺");
-        // 自定义文件命名，注意 %s 会自动填充表实体属性！
-        gc.setMapperName("%sDao"); //设置Mapper的类名  默认XXXMapper
-        // gc.setXmlName("%sDao");
-        // gc.setServiceName("%sService");      //默认 I+XXX+Service
-        // gc.setServiceImplName("%sServiceDiy"); //默认 XXXServiceImpl
-        // gc.setControllerName("%sAction"); //默认后缀是Controller
-        //gc.setOutputDir("D://"); //设置文件的输出目录  (默认"D://");
-        // gc.setKotlin(true); //是否生成 kotlin 代码 (默认为false)
+
+        //设置文件的输出目录  (默认"D://")
+        gc.setOutputDir(FILE_OUT_DIR);
+        gc.setAuthor(FILE_Author); //设置作者
+
+        /**
+         * 设置生成文件的后缀
+         */
+        String suffix = "%s";
+        // gc.setControllerName(suffix+"Action");        //设置controller 的后缀  默认后缀是XXXController
+        gc.setMapperName(suffix + "Dao"); // 自定义文件命名，注意 %s 会自动填充表实体属性！ 设置Mapper的类名  默认XXXMapp
+        // gc.setServiceImplName("%sServiceDiy"); //设置service实现类的后缀  //默认 XXXServiceImpl
+        gc.setServiceName(suffix + "Service");//默认 I+XXX+Service
+        //String xmlName =suffix+ "-sqlmap" ;
+        String xmlName = null ;
+        gc.setXmlName(xmlName); //默认Mapper
+
 
 
         mpg.setGlobalConfig(gc);
@@ -92,15 +94,14 @@ public class MpGenerator {
 
         // 自定义 xxList.jsp 生成
         List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
+
   /*      focList.add(new FileOutConfig("/template/list.jsp.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
                 return "D://my_" + tableInfo.getEntityName() + ".jsp";
             }
-        });
-        cfg.setFileOutConfigList(focList);
-        mpg.setCfg(cfg);*/
+        });*/
 
         // 调整 xml 生成目录演示
         focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
@@ -114,41 +115,48 @@ public class MpGenerator {
         mpg.setCfg(cfg);
     }
 
+    /**
+     * 配置生成文件的策略
+     */
     private void configStrategy() {
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
+
         strategy.setEntityLombokModel(true);//
-        strategy.setTablePrefix(new String[]{"tlog_", "tsys_"});// 此处可以修改为您的表前缀
-
+        strategy.setEntityBuilderModel(true);//【实体】是否为构建者模型（默认 false）
+        strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[]{"user"}); // 需要生成的表
-        // strategy.setExclude(new String[]{"test"}); // 排除生成的表
 
-        // 自定义实体父类
-        // strategy.setSuperEntityClass("com.baomidou.demo.TestEntity");
-        // 自定义实体，公共字段
-        // strategy.setSuperEntityColumns(new String[] { "test_id", "age" });
-        // 自定义 mapper 父类
-        // strategy.setSuperMapperClass("com.baomidou.demo.TestMapper");
-        // 自定义 service 父类
-        // strategy.setSuperServiceClass("com.baomidou.demo.TestService");
-        // 自定义 service 实现类父类
-        // strategy.setSuperServiceImplClass("com.baomidou.demo.TestServiceImpl");
-        // 自定义 controller 父类
+        //修改去除的表前缀(比如数据库中的表前缀 是 Tb_User 只需要生成User 这儿设置表前缀就行 )
+        String[] tablePrefix = {"sys_"};
+        strategy.setTablePrefix(tablePrefix);
+
+        //需要生成的表(全表名)
+        strategy.setInclude(INCLUDE_TAB_NAME); // 需要生成的表
+
+        // 排除生成的表
+        // strategy.setExclude(new String[]{"test"});
+
+        /**
+         * 设置生成类 继承的父类
+         */
+        //strategy.setSuperEntityClass("com.baomidou.demo.test.TestEntity");
+        //strategy.setSuperEntityColumns(new String[] { "school", "age" });
         // strategy.setSuperControllerClass("com.baomidou.demo.TestController");
+        // strategy.setSuperServiceClass("com.baomidou.demo.TestService");
+        // strategy.setSuperServiceImplClass("com.baomidou.demo.TestServiceImpl");
+        // strategy.setSuperMapperClass("com.baomidou.demo.TestMapper");
 
         // 【实体】是否生成字段常量（默认 false）
         // public static final String ID = "test_id";
         // strategy.setEntityColumnConstant(true);
-        // 【实体】是否为构建者模型（默认 false）
-        // public User setName(String name) {this.name = name; return this;}
-        strategy.setEntityBuilderModel(true);
+
         mpg.setStrategy(strategy);
     }
 
     private void configDataSource() {
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
+
         // dsc.setDbType(DbType.MYSQL);
 /*        dsc.setTypeConvert(new MySqlTypeConvert() {
             // 自定义数据库表字段类型转换【可选】
@@ -160,25 +168,52 @@ public class MpGenerator {
             }
         });*/
 
-        dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("");
-        dsc.setUrl("jdbc:mysql://localhost:3306/mybatis"); //设置链接数据库的四大属性
+        //设置链接数据库的四大属性
+        dsc.setDriverName(JDBC_DRIVER_NAME);
+        dsc.setUsername(JDBC_USER_NAME);
+        dsc.setPassword(JDBC_PASSWORD);
+        dsc.setUrl(JDBC_URL);
         mpg.setDataSource(dsc);
     }
 
-
     /**
      * 配置包名
+     * 修改对应的变量就行
+     * 查看默认值  查看 PackageConfig 对象
      *
      * @param :
      * @Author: Forever丶诺
      * @Date: 17:04 2018/2/9
      */
     private void configPackage() {
-        mpg.setPackageInfo(new PackageConfig().setParent("com.baomidou").setModuleName("test").setEntity("model").setMapper("dao").setXml("dao.xml").setController("controller"));
-    }
 
+        //父级包名
+        String parentVal = "com.baomidou";
+        //模块名(备注如果设置了模块名,controller类上的@RequestMapping("/模块名/类名"))
+        String moduleNameVal = null;
+        //实体bean的包名
+        String entityNameVal = "model";
+        //控制层的包名
+        String controllerNameVal = "controller";
+        //dao层的包名
+        String mapperNameVal = "dao";
+        //xml文件生成的包名
+        String mapperXmlVal = "mapperXml";
+        //service接口的包名
+        String serviceVal = "service";
+        //service实现类的包名
+        String serviceImpVal = "serviceImpl";
+
+        mpg.setPackageInfo(new PackageConfig()
+                .setParent(PARENT_PACKET_VAL)
+                .setModuleName(moduleNameVal)
+                .setEntity(entityNameVal)
+                .setMapper(mapperNameVal)
+                .setXml(mapperXmlVal)
+                .setController(controllerNameVal)
+                .setService(serviceVal).setServiceImpl(serviceImpVal)
+        );
+    }
 
     /**
      * 配置模板的生成文件
@@ -200,6 +235,5 @@ public class MpGenerator {
         // 如上任何一个模块如果设置 空 OR Null 将不生成该模块。
         // mpg.setTemplate(tc);
     }
-
 
 }
