@@ -3,15 +3,26 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+
+    <!--
+        properties :
+        1.SqlSessionFactory.build(Read,Properties); //进行传参
+        2.url和resource 读取参数
+        3.properties的元素体内进行传参
+    -->
+    <properties resource="dbConfig.properties">
+        <property name="jdbc_username" value="root"/>
+    </properties>
+
     <!--mybatis对应的数据源-->
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/mybatis"/>
-                <property name="username" value="root"/>
-                <property name="password" value=""/>
+                <property name="driver" value="${jdbc_driverClassName}"/>
+                <property name="url" value="${jdbc_url}"/>
+                <property name="username" value="${jdbc_username}"/>
+                <property name="password" value="${jdbc_password}"/>
             </dataSource>
         </environment>
     </environments>

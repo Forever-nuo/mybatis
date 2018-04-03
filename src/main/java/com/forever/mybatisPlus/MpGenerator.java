@@ -54,7 +54,6 @@ public class MpGenerator {
     }
 
 
-
     private void setGenerator() {
         // 选择 freemarker 引擎，默认 Veloctiy
         // mpg.setTemplateEngine(new FreemarkerTemplateEngine());
