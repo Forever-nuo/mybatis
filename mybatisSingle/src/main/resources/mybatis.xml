@@ -32,8 +32,15 @@
     <!---->
 
 
+    <!--添加自定义处理器-->
+    <typeHandlers>
+        <typeHandler handler="com.forever.mybatissingle.handler.MyTypeHandler"/>
+    </typeHandlers>
+
+
     <!--mybatis对应的数据源-->
     <environments default="development">
+        <!--mysql 数据环境-->
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
@@ -43,6 +50,7 @@
                 <property name="password" value="${jdbc_password}"/>
             </dataSource>
         </environment>
+        <!--oracle数据华宁-->
         <environment id="oracle">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
@@ -56,7 +64,7 @@
 
 
     <databaseIdProvider type="DB_VENDOR">
-        <property name="Oracle" value="oracle" />
+        <property name="Oracle" value="oracle"/>
     </databaseIdProvider>
 
 

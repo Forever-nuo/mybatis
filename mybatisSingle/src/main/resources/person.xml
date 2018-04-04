@@ -4,13 +4,43 @@
 <mapper namespace="com.forever.mybatissingle.dao.PersonDao">
 
 
+    <insert id="insertPerson" parameterType="person">
+        INSERT  INTO  person (name,age,version,addTime)
+        VALUES (#{name},#{age},#{version},#{addTime})
+    </insert>
 
-    <select id="selectPerson" resultType="person" >
+
+    <!--
+    方式1:只定义typeHandler=自定义TypeHandler的全类名
+    这种方式 只要自定义Type就行
+    -->
+    <insert id="insertPerson2">
+             INSERT  INTO  person (name,age,version,addTime)
+            VALUES (#{name},#{age},#{version},#{addTime,typeHandler=com.forever.mybatissingle.handler.MyTypeHandler})
+        </insert>
+
+
+    <!--方式2:
+只定义javaType=Date,jdbcType=VARCHAR
+但是需要在mybatis的文件中 定义 typeHandler标签
+-->
+    <!--    <insert id="insertPerson2">
+            INSERT  INTO  person (name,age,version,addTime)
+            VALUES (#{name},#{age},#{version},#{addTime,javaType=Date,jdbcType=VARCHAR})
+        </insert>-->
+
+
+    <!--方式3:定义 javaType=Date,jdbcType=VARCHAR,typeHandler=自定义TypeHandler的全类名-->
+    <!-- <insert id="insertPerson2">
+                INSERT  INTO  person (name,age,version,addTime)
+                VALUES (#{name},#{age},#{version},#{addTime,javaType=Date,jdbcType=VARCHAR,typeHandler=com.forever.mybatissingle.handler.MyTypeHandler})
+     </insert>-->
+
+
+    <select id="selectPerson" resultType="person">
          select * from person where id = #{id}
     </select>
 
-    <select id="selectPerson" resultType="person" databaseId="oracle">
-        select * from MYBATIS_PERSON where "id" = #{id}
-    </select>
+    <!---->
 
 </mapper>

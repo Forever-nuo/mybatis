@@ -17,4 +17,16 @@ public interface PersonDao {
      * @Date: 22:56 2018-4-3
      */
     Person selectPerson(Integer id);
+
+    /**
+     * 新增一个用户
+     *
+     * @param person
+     * @return
+     */
+    int insertPerson(Person person);
+
+
+    int insertPerson2(Person person);
+
 }

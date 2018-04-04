@@ -49,7 +49,7 @@ public class TestMybatis {
         Person person;
         try {
             //参数是 唯一名称 = 命名空间 + id
-            person = sqlSession.selectOne("com.forever.mybatissingle.dao.PersonDao.selectPerson", 1);
+            person = sqlSession.selectOne("com.forever.mybatissingle.dao.PersonDao.selectPerson", 2);
         } finally {
             sqlSession.close();
         }
