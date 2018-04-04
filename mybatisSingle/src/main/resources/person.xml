@@ -5,7 +5,12 @@
 
 
 
-    <select id="selectPerson" resultType="person">
+    <select id="selectPerson" resultType="person" >
          select * from person where id = #{id}
     </select>
+
+    <select id="selectPerson" resultType="person" databaseId="oracle">
+        select * from MYBATIS_PERSON where "id" = #{id}
+    </select>
+
 </mapper>

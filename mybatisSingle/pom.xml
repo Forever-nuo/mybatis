@@ -55,6 +55,13 @@
             <version>${slf4j.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0.3</version>
+            <systemPath>${project.basedir}/src/main/lib/ojdbc6-11.2.0.3.jar</systemPath>
+        </dependency>
+
 
     </dependencies>
 </project>

@@ -31,6 +31,7 @@
 
     <!---->
 
+
     <!--mybatis对应的数据源-->
     <environments default="development">
         <environment id="development">
@@ -42,7 +43,22 @@
                 <property name="password" value="${jdbc_password}"/>
             </dataSource>
         </environment>
+        <environment id="oracle">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${oracle.driverName}"/>
+                <property name="url" value="${oracle.url}"/>
+                <property name="username" value="${oracle.userName}"/>
+                <property name="password" value="${oracle.password}"/>
+            </dataSource>
+        </environment>
     </environments>
+
+
+    <databaseIdProvider type="DB_VENDOR">
+        <property name="Oracle" value="oracle" />
+    </databaseIdProvider>
+
 
     <mappers>
         <mapper resource="person.xml"/>
