@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forever.mybatissingle.dao.DynamicIfDao">
+
+
+    <!--
+    使用set标签
+    技巧:最后一个的set也使用,号,这样后期添加也不会受影响
+    -->
+    <update id="updateDataBySet">
+        UPDATE personDynamic
+        <set>
+            <if test="name!=null">
+                name = #{name},
+            </if>
+            <if test="age!=null">
+                age = #{age},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--
+     动态语句 If的测试
+    -->
+    <select id="selectPersonIf" resultType="com.forever.mybatissingle.mode.Person">
+        select * FROM personDynamic WHERE
+        1=1
+        <if test="name!=null">
+            and name = #{name}
+        </if>
+        <if test="age!=null">
+            and age = #{age}
+        </if>
+    </select>
+
+    <!--
+    if 语句可能导致的错误
+    -->
+    <select id="selectPersonIfError" resultType="com.forever.mybatissingle.mode.Person">
+        select * FROM personDynamic WHERE
+        <if test="name!=null">
+            name = #{name}
+        </if>
+        <if test="age!=null">
+            and age = #{age}
+        </if>
+    </select>
+
+
+    <!--
+    解决方式:
+    1.添加1=1 条件
+    2.使用where标签
+    3.使用trim标签
+    -->
+
+
+    <!--
+    使用where标签
+    -->
+    <select id="selectPersonIfAndWhere" resultType="com.forever.mybatissingle.mode.Person">
+        select * FROM personDynamic
+        <where>
+            <if test="name!=null">
+                and name = #{name}
+            </if>
+            <if test="age!=null">
+                and age = #{age}
+            </if>
+        </where>
+    </select>
+
+    <!--
+    set标签
+    -->
+
+
+    <select id="selectPersonIfAndTrim" resultType="com.forever.mybatissingle.mode.Person">
+        select * FROM personDynamic
+        <trim prefix="where" prefixOverrides="and">
+            <if test="name!=null">
+                and name = #{name}
+            </if>
+            <if test="age!=null">
+                and age = #{age}
+            </if>
+        </trim>
+    </select>
+
+
+</mapper>

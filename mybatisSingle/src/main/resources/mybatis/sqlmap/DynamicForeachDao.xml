@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forever.mybatissingle.dao.DynamicForeachDao">
+    <update id="testMap">
+        UPDATE personDynamic
+        <set>
+            <foreach collection="list.get(0)" index="key" separator=",">
+                ${key} =
+                <foreach collection="list" separator=" " item="dataMap" open="case id " >
+                    when #{dataMap.id} then #{dataMap.${key}
+                </foreach>
+            </foreach>
+        </set>
+    </update>
+
+
+    <!--
+    foreach 循环list 有 param注解
+    -->
+    <select id="testListHasAnnotation" resultType="com.forever.mybatissingle.mode.Person">
+        SELECT * FROM personDynamic
+        <where>
+            <foreach collection="ids" open=" id in (" close=")" separator="," item="id">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+
+    <!--
+   foreach 循环list 没有param注解
+   -->
+    <select id="testList" resultType="com.forever.mybatissingle.mode.Person">
+        SELECT * FROM personDynamic
+        <where>
+            <foreach collection="list" open=" id in (" close=")" separator="," item="id">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+
+
+    <select id="testArray" resultType="com.forever.mybatissingle.mode.Person">
+        SELECT * FROM personDynamic
+        <where>
+            <foreach collection="array" open=" id in (" close=")" separator="," item="id">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+
+
+    <!--
+    使用pojo封装list
+    -->
+    <select id="testObjIds" resultType="com.forever.mybatissingle.mode.Person">
+        SELECT * FROM personDynamic
+        <where>
+            <foreach collection="ids" open=" id in (" close=")" separator="," item="id">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+
+    <!--得到所有的Person Map形式-->
+    <select id="getAllPersonMap" resultType="map">
+        select * FROM  personDynamic
+    </select>
+</mapper>

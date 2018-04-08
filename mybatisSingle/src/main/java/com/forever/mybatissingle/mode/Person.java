@@ -5,6 +5,7 @@ import lombok.experimental.Accessors;
 import org.apache.ibatis.type.Alias;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author: Forever丶诺
@@ -12,11 +13,13 @@ import java.util.Date;
  */
 @Alias("person")
 @Data
-@Accessors(chain=true)
+@Accessors(chain = true)
 public class Person {
     private Integer id;
     private String name;
     private Integer age;
     private Integer version;
     private Date addTime;
+
+    List<Integer> ids;
 }

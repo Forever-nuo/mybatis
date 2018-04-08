@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>If动态语句的演示</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+
+    <script>
+
+        $(function () {
+            // 开始写 jQuery 代码...
+            $("#if语句的演示接口1").click(
+                function () {
+                    $.get("../../dynamicIf/selectPersonIfNoName");
+                }
+            );
+
+            $("#if语句的演示接口2").click(
+                function () {
+                    $.get("../../dynamicIf/selectPersonIfNoAge");
+                }
+            );
+
+            $("#if接口错误的演示").click(
+                function () {
+                    $.get("../../dynamicIf/selectPersonIfError");
+                }
+            );
+
+
+            $("#if和where结合使用没有条件").click(
+                function () {
+                    $.get("../../dynamicIf/selectPersonIfAndWhereNoCondition");
+                }
+            );
+
+
+            $("#if和where结合使用有条件").click(
+                function () {
+                    $.get("../../dynamicIf/selectPersonIfAndWhereHasCondition");
+                }
+            );
+
+            $("#if和Trim结合使用有条件").click(
+                function () {
+                    $.get("../../dynamicIf/selectPersonIfAndTrim");
+                }
+            );
+
+
+            $("#if和Set结合使用").click(
+                function () {
+                    $.get("../../dynamicIf/updateDataBySet");
+                }
+            );
+
+        });
+
+    </script>
+</head>
+<body>
+<h1>增删改查的演示</h1>
+
+<!---->
+<div>分别演示 接口1和 接口2 对比不同的sql语句</div>
+<button id="if语句的演示接口1">
+    if语句的演示接口1
+</button>
+<br><br>
+<button id="if语句的演示接口2">
+    if语句的演示接口2
+</button>
+<br><br>
+
+
+<div>if接口错误的演示</div>
+<button id="if接口错误的演示">
+    if接口错误的演示
+</button>
+<br><br>
+
+
+<div>if和where结合使用没有条件</div>
+<button id="if和where结合使用没有条件">
+    if和where结合使用没有条件
+</button>
+<br><br>
+
+
+<div>if和where结合使用有条件</div>
+<button id="if和where结合使用有条件">
+    if和where结合使用有条件
+</button>
+<br><br>
+
+
+<button id="if和Set结合使用">
+    if和Set结合使用
+</button>
+<br><br>
+
+<div>if和Trim结合使用有条件</div>
+<button id="if和Trim结合使用有条件">
+    if和Trim结合使用有条件
+</button>
+<br><br>
+
+
+
+</body>
+</html>

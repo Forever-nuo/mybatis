@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>If标签test属性的演示</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+
+    <script>
+
+        $(function () {
+            // 开始写 jQuery 代码...
+            $("#choose标签的使用参数1").click(
+                function () {
+                    var param = {name:"张三"};
+                    $.get("../../dynamicChoose/testChoose",param);
+                }
+            );       $("#choose标签的使用参数2").click(
+                function () {
+                    var param = {name:"王五"};
+                    $.get("../../dynamicChoose/testChoose",param);
+                }
+            );       $("#choose标签的使用参数3").click(
+                function () {
+                    var param = {name:"其他"};
+                    $.get("../../dynamicChoose/testChoose",param);
+                }
+            );
+
+
+        });
+
+    </script>
+</head>
+<body>
+
+<h2>choose标签1</h2>
+<button id="choose标签的使用参数1">
+    choose标签的使用参数1
+</button>
+<br><br>
+<h2>choose标签2</h2>
+<button id="choose标签的使用参数2">
+    choose标签的使用参数2
+</button>
+<br><br>
+<h2>choose标签2</h2>
+<button id="choose标签的使用参数3">
+    choose标签的使用参数3
+</button>
+<br><br>
+
+
+
+
+</body>
+</html>

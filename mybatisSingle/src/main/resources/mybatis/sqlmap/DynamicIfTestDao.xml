@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forever.mybatissingle.dao.DynamicIfTestDao">
+
+    <!--
+    test 条件判断 大于
+    -->
+    <select id="testNumberGt1" resultType="person">
+        SELECT * FROM personDynamic
+        <where>
+            <if test="age>10">
+                age > #{age}
+            </if>
+        </where>
+    </select>
+
+
+    <!--
+    使用转译符
+    > gt
+    >= gte
+    < lt
+    <= lte
+    -->
+    <select id="testNumberLt1" resultType="person">
+        SELECT * FROM personDynamic
+        <where>
+            <if test="age lt 10">
+                age  <![CDATA[ < ]]>  #{age}
+            </if>
+        </where>
+    </select>
+
+
+    <!--
+    多个条件的判断
+    -->
+    <select id="testManyCondition" resultType="person">
+        SELECT * FROM personDynamic
+        <where>
+            <if test="name!=null and name == '张三' ">
+                name = #{name}
+            </if>
+        </where>
+    </select>
+
+    <select id="testOr" resultType="person">
+        SELECT * FROM personDynamic
+        <where>
+            <if test="name!=null and (name == '张三' or name =='王五') ">
+                name = #{name}
+            </if>
+        </where>
+    </select>
+
+    <select id="testOr1" resultType="person">
+        SELECT * FROM personDynamic
+        <where>
+            <if test="name!=null and (name == '张三' || name =='王五') ">
+                name = #{name}
+            </if>
+        </where>
+    </select>
+
+</mapper>

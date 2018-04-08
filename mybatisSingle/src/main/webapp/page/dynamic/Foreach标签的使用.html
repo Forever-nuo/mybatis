@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>foreach标签演示</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+
+    <script>
+
+        $(function () {
+            // 开始写 jQuery 代码...
+            $("#foreach的List参数有param注解").click(
+                function () {
+                    $.get("../../dynamicForeach/testListHasAnnotation");
+                }
+            );
+
+            $("#foreach的array参数没有param注解").click(
+                function () {
+                    $.get("../../dynamicForeach/testArray");
+                }
+            );
+
+            $("#使用Pojo封装List").click(
+                function () {
+                    $.get("../../dynamicForeach/testObjIds");
+                }
+            );
+            $("#foreachMap数据").click(
+                function () {
+                    $.get("../../dynamicForeach/testMap");
+                }
+            );
+        });
+
+    </script>
+</head>
+<body>
+
+<h2>Foreach标签</h2>
+<button id="foreach的List参数有param注解">
+    foreach的List参数有param注解
+</button>
+<br><br>
+
+<button id="foreach的List参数没有param注解">
+    foreach的List参数没有param注解
+</button>
+<br><br>
+
+<button id="foreach的array参数没有param注解">
+    foreach的array参数没有param注解
+</button>
+<br><br>
+
+<button id="使用Pojo封装List">
+    使用Pojo 封装 List
+</button>
+<br><br>
+
+
+<button id="foreachMap数据">
+    foreachMap数据
+</button>
+<br><br>
+
+</body>
+</html>

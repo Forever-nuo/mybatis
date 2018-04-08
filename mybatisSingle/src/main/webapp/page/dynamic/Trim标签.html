@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>If动态语句的演示</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+
+    <script>
+
+        $(function () {
+            // 开始写 jQuery 代码...
+            $("#Trim标签代替Where标签").click(
+                function () {
+                    $.get("../../dynamicTrim/getDataByTrimReplaceWhere");
+                }
+            );
+            $("#Trim标签代替Set标签").click(
+                function () {
+                    $.get("../../dynamicTrim/updateDataByTrimReplaceSet");
+                }
+            );
+
+            $("#Trim中多个Override的示例").click(
+                function () {
+                    $.get("../../dynamicTrim/getDataByTrimAndManyPrefixOverrides");
+                }
+            );
+        });
+
+    </script>
+</head>
+<body>
+
+
+<button id="Trim标签代替Where标签">
+    Trim标签代替Where标签
+</button>
+<br><br>
+
+<button id="Trim标签代替Set标签">
+    Trim标签代替Set标签
+</button>
+<br><br>
+
+
+<button id="Trim中多个Override的示例">
+    Trim中多个Override的示例
+</button>
+<br><br>
+
+
+</body>
+</html>
