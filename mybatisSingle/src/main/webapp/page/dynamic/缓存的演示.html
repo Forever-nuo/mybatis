@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>If标签test属性的演示</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+
+    <script>
+
+        $(function () {
+            // 开始写 jQuery 代码...
+            $("#一级缓存的demo1").click(
+                function () {
+                    $.get("../../cache/firstCacheDemo1");
+                }
+            );
+
+
+        });
+
+    </script>
+</head>
+<body>
+
+<h2>缓存的demo1</h2>
+<button id="一级缓存的demo1">
+    一级缓存的demo1
+</button>
+<br><br>
+
+
+</body>
+</html>

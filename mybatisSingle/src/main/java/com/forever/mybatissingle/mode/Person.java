@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import org.apache.ibatis.type.Alias;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,8 @@ import java.util.List;
 @Alias("person")
 @Data
 @Accessors(chain = true)
-public class Person {
+public class Person implements Serializable {
+    private static final long serialVersionUID = 788085235452655595L;
     private Integer id;
     private String name;
     private Integer age;

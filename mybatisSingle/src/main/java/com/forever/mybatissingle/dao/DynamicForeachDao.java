@@ -53,5 +53,12 @@ public interface DynamicForeachDao {
      */
     List<Person> testObjIds(Person person);
 
-    void testMap(List<Map> allPersonMap);
+    /**
+     * 测试 List中是Map的元素
+     *
+     * @param allPersonMap
+     */
+    void testMapList(List<Map> allPersonMap);
+
+    void testMap(@Param("map") Map map);
 }

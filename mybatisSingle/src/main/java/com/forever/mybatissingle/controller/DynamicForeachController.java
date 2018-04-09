@@ -70,12 +70,20 @@ public class DynamicForeachController {
     }
 
 
+    @RequestMapping("/testMapList")
+    @ResponseBody
+    public void testMapList() {
+        List<Map> allPersonMap = dynamicForeachDao.getAllPersonMap();
+        dynamicForeachDao.testMapList(allPersonMap);
+    }
+
+
     @RequestMapping("/testMap")
     @ResponseBody
     public void testMap() {
         List<Map> allPersonMap = dynamicForeachDao.getAllPersonMap();
-        dynamicForeachDao.testMap(allPersonMap);
-
+        Map map = allPersonMap.get(0);
+        dynamicForeachDao.testMap(map);
     }
 
 

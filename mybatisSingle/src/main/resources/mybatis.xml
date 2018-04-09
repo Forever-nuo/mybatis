@@ -14,7 +14,9 @@
         <property name="jdbc_username" value="root"/>
     </properties>
 
-
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
     <typeAliases>
         <!--
         单个类起别名
@@ -71,7 +73,8 @@
 
 
     <mappers>
-        <mapper resource="person.xml"/>
+        <mapper resource="mybatis/sqlmap/person.xml"/>
+        <mapper resource="mybatis/sqlmap/CacheDao.xml"/>
     </mappers>
 
 

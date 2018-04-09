@@ -14,10 +14,10 @@ import java.io.Reader;
  */
 public class TestBase {
 
-    public SqlSession getSqlSession(){
+    public SqlSession getSqlSession() {
         String mybatisXml = "mybatis.xml";
         Reader reader = null;
-        SqlSession sqlSession =null;
+        SqlSession sqlSession = null;
         try {
             reader = Resources.getResourceAsReader(mybatisXml);
             SqlSessionFactory sqlFactory = new SqlSessionFactoryBuilder().build(reader);
@@ -27,6 +27,19 @@ public class TestBase {
 
         }
         return sqlSession;
+    }
+
+    public SqlSessionFactory getSessionFactory() {
+        String mybatisXml = "mybatis.xml";
+        Reader reader = null;
+        SqlSessionFactory sqlFactory = null;
+        try {
+            reader = Resources.getResourceAsReader(mybatisXml);
+            sqlFactory = new SqlSessionFactoryBuilder().build(reader);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sqlFactory;
     }
 
 }

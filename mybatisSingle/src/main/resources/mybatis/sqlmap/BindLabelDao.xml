@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forever.mybatissingle.dao.BindLabelDao">
+
+    <!--使用bind
+    定义变量: name 变量名 value 变量的值
+    使用变量: #{新的变量名}
+    -->
+    <select id="demo1" resultType="com.forever.mybatissingle.mode.Person">
+        select * from personDynamic
+        <where>
+            <bind name="newName" value=" '%'+name+'%' "/>
+            name like #{newName}
+        </where>
+    </select>
+
+
+    <!--
+    使用concat的函数 模糊查询
+    -->
+    <select id="likeSelectByConcat" resultType="com.forever.mybatissingle.mode.Person">
+        select * from personDynamic
+        <where>
+            name like concat ('%',#{name},'%')
+        </where>
+    </select>
+
+    <!--
+    使用占位符$模糊查询
+    -->
+    <select id="likeSelectByZWF" resultType="com.forever.mybatissingle.mode.Person">
+        select * from personDynamic
+        <where>
+            name like '%${name}%'
+        </where>
+    </select>
+
+</mapper>

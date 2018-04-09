@@ -2,17 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.forever.mybatissingle.dao.DynamicForeachDao">
-    <update id="testMap">
+    <update id="testMapList">
         UPDATE personDynamic
         <set>
             <foreach collection="list.get(0)" index="key" separator=",">
                 ${key} =
-                <foreach collection="list" separator=" " item="dataMap" open="case id " >
-                    when #{dataMap.id} then #{dataMap.${key}
+                <foreach collection="list" separator=" " item="dataMap" open="case id " close="end">
+                    when #{dataMap.id} then #{dataMap.${key}}
                 </foreach>
             </foreach>
         </set>
     </update>
+
+
+    <!--
+    测试遍历Map
+    -->
+    <update id="testMap">
+        UPDATE personDynamic
+        <set>
+            <foreach  collection="map" index="key" item="value" separator=",">
+                ${key} = #{value}
+            </foreach>
+        </set>
+        where
+        id=#{map.id}
+    </update>
+
+
 
 
     <!--

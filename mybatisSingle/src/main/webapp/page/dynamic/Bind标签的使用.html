@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bind标签的演示</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+
+    <script>
+
+        $(function () {
+            // 开始写 jQuery 代码...
+            $("#bind标签的演示使用1").click(
+                function () {
+                    $.get("../../bindLabel/demo1");
+                }
+            );
+
+            $("#使用concat模糊查询").click(
+                function () {
+                    $.get("../../bindLabel/likeSelectByConcat");
+                }
+            );
+
+            $("#使用占位符模糊查询").click(
+                function () {
+                    $.get("../../bindLabel/likeSelectByZWF");
+                }
+            );
+        });
+
+    </script>
+</head>
+<body>
+
+<h2>bind标签的演示使用1</h2>
+<button id="bind标签的演示使用1">
+    bind标签的演示使用1
+</button>
+<br><br>
+
+<h2>使用concat模糊查询</h2>
+<button id="使用concat模糊查询">
+    使用concat模糊查询
+</button>
+<br><br>
+
+<h2>使用占位符模糊查询</h2>
+<button id="使用占位符模糊查询">
+    使用占位符模糊查询
+</button>
+<br><br>
+
+
+</body>
+</html>
